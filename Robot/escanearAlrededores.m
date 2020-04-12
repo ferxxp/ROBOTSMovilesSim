@@ -1,3 +1,10 @@
 function [distancia, angulo] =  escanearAlrededores(robot)
-[distancia, angulo] = robot.Sensor(robot.PosReal, robot.MapaReal);
+
+if robot.ruidoOn
+    [distancia, angulo] = robot.Sensor(robot.PosReal, robot.MapaReal);
+    distancia = distancia+distancia.*(-1+2*rand(size(distancia))).*robot.ruiLidar/100;
+else
+    [distancia, angulo] = robot.Sensor(robot.PosReal, robot.MapaReal);
+end
+
 
