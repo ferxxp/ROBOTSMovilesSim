@@ -15,4 +15,5 @@ else
     robot.PosReal = robot.PosReal + vreal'*robot.TimeStep; 
     robot.Posicion=robot.PosReal-robot.InitPos;
 end
+robot.TotalTime=robot.TotalTime+robot.TimeStep;
 

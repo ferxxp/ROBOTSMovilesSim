@@ -1,6 +1,10 @@
 function mostrarScan(robot,distancia, angulo)
 %MOSTRARSCAN Summary of this function goes here
 %   Detailed explanation goes here
+if ~ishghandle(robot.figSensor)
+    pantallaSize=get(0,'ScreenSize');
+    robot.figMapa=figure('Position',[pantallaSize(3)/3,0,pantallaSize(3)/3,pantallaSize(4)/3]);
+end
 figure(robot.figSensor);
 
 clf;

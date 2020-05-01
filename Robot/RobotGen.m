@@ -1,4 +1,4 @@
-function [robot]= RobotGen(map,pos,rangosensor,tp,rOn,rLidar,rOdo)
+function [robot]= RobotGen(map,pos,rangosensor,tp,gOn,rOn,rLidar,rOdo)
 
 robot.MapaReal=binaryOccupancyMap(map,1);
         [mapdimx,mapdimy] = size(map);
@@ -16,9 +16,22 @@ robot.Sensor = rangeSensor;
 robot.Sensor.Range = rangosensor;
 
 robot.TimeStep=tp;
-robot.ruidoOn=rOn;
+robot.TotalTime=0;
+if nargin > 4
+  robot.GraphicsOn = gOn;
+else
+  robot.GraphicsOn = true;
+end
 
-robot.ruiLidar=rLidar;
-robot.ruiOdo=rOdo;
+if nargin > 7
+  robot.ruidoOn=rOn;
+  robot.ruiLidar=rLidar;
+  robot.ruiOdo=rOdo;
+else
+  robot.ruidoOn=false;
+  robot.ruiLidar=0;
+  robot.ruiOdo=0;
+end
+
 
 updatePlotRobot(robot);

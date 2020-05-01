@@ -4,7 +4,7 @@ ControlRuta = controllerPurePursuit('DesiredLinearVelocity',2,'MaxAngularVelocit
 diffDrive = differentialDriveKinematics("VehicleInputs","VehicleSpeedHeadingRate");
 
 if robot.ruidoOn
-    ControlRuta.Waypoints=[robot.Posicion(1:2)'+robot.InitPos(1:2)' , Meta'];
+    ControlRuta.Waypoints=Meta';
     [velL, velR]=ControlRuta(robot.PosReal);
     
     vreal = derivative(diffDrive, robot.PosReal', [velL+(-1+2*rand())*robot.ruiOdo/100 velR+(-1+2*rand())*robot.ruiOdo/100]);
@@ -13,7 +13,7 @@ if robot.ruidoOn
     vreal = derivative(diffDrive, robot.Posicion', [velL velR]);
     robot.Posicion = robot.Posicion + vreal'*robot.TimeStep;
 else
-    ControlRuta.Waypoints=[robot.PosReal(1:2)' , Meta'];
+    ControlRuta.Waypoints= flip(Meta);
     [velL, velR]=ControlRuta(robot.PosReal);
 
     vreal = derivative(diffDrive, robot.PosReal', [velL velR]);
@@ -22,5 +22,6 @@ else
     robot.Posicion=robot.PosReal-robot.InitPos;
 
 end
+robot.TotalTime=robot.TotalTime+robot.TimeStep;
 end
 
