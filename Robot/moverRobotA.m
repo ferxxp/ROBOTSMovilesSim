@@ -1,10 +1,10 @@
 function [robot] = moverRobotA(robot,Meta)
 
-ControlRuta = controllerPurePursuit('DesiredLinearVelocity',2,'MaxAngularVelocity',3);
+ControlRuta = controllerPurePursuit('DesiredLinearVelocity',2,'MaxAngularVelocity',20);
 diffDrive = differentialDriveKinematics("VehicleInputs","VehicleSpeedHeadingRate");
 
 if robot.ruidoOn
-    ControlRuta.Waypoints=Meta';
+    ControlRuta.Waypoints=Meta;
     [velL, velR]=ControlRuta(robot.PosReal);
     
     vreal = derivative(diffDrive, robot.PosReal', [velL+(-1+2*rand())*robot.ruiOdo/100 velR+(-1+2*rand())*robot.ruiOdo/100]);
@@ -13,7 +13,7 @@ if robot.ruidoOn
     vreal = derivative(diffDrive, robot.Posicion', [velL velR]);
     robot.Posicion = robot.Posicion + vreal'*robot.TimeStep;
 else
-    ControlRuta.Waypoints= flip(Meta);
+    ControlRuta.Waypoints= Meta;
     [velL, velR]=ControlRuta(robot.PosReal);
 
     vreal = derivative(diffDrive, robot.PosReal', [velL velR]);

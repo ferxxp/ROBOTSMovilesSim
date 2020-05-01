@@ -1,9 +1,9 @@
 function Ruta= Path(robot,Goal,Inflation,ideal)
 if nargin==4 && ideal
-    Grid=binaryOccupancyMap(getOccupancy(robot.MapaReal),robot.MapaReal.Resolution);
+    Grid=binaryOccupancyMap(flip(getOccupancy(robot.MapaReal)),robot.MapaReal.Resolution);
     Res=robot.MapaReal.Resolution;
 else
-    Grid=binaryOccupancyMap(getOccupancy(robot.Mapa),robot.Mapa.Resolution);
+    Grid=binaryOccupancyMap(flip(getOccupancy(robot.Mapa)),robot.Mapa.Resolution);
     Res=robot.Mapa.Resolution;
     inflate(Grid,Inflation);
 end
@@ -55,5 +55,5 @@ else
 
 end
 
-Ruta = OptimalPath./Grid.Resolution;
+Ruta = flip(flip(OptimalPath./Grid.Resolution,2));
 end

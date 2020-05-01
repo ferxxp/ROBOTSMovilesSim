@@ -2,17 +2,20 @@ function OptimalPath=DIJSTRA(Start,MAPB,Goal,Connecting_Distance)
 
 OptimalPath=inf;
 [SGoal,~]=size(Goal);
-Goal=Goal';
-MAP = int8(getOccupancy(MAPB)); 
+MAP = (int8(getOccupancy(MAPB))); 
 [Height,Width]=size(MAP);
-for a = 0:SGoal-1
-    DestinoY=Goal(2+a*2);
-    DestinoX=Goal(1+a*2);
+for a = 1:SGoal
+    DestinoY=Goal(a,1);
+    DestinoX=Goal(a,2);
     MAP(round(DestinoX*MAPB.Resolution)+1,round(DestinoY*MAPB.Resolution)+1)=5;
     max(max(MAP))
      disp([round(DestinoX*MAPB.Resolution)+1,round(DestinoY*MAPB.Resolution)+1])
      disp([Start(1),Start(2)])
 end
+figure;
+    surf(MAP)
+    shading interp
+    colormap colorcube
 ParentMatrix=zeros(Height,Width,2);
 ConectionNeighbours=[1,0;0,1;-1,0;0,-1;1,1;1,-1;-1,-1;-1,1];%[1,1;1,0;1,-1;0,-1;-1,-1;-1,0;-1,1;0,1];
 QueueNodes=zeros(Height*Width,2);

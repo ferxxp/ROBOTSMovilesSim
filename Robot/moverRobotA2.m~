@@ -1,0 +1,17 @@
+function [robot,camino] = moverRobotA2(robot,camino)
+
+currentGoal=camino(1,:);
+while norm(robot.Posicion(1:2)+robot.InitPos(1:2)-currentGoal)<0.1 && ~isempty(camino)
+    camino(1,:)=[];
+    currentGoal=camino(1,:);
+end
+
+angleofattack=atan2(currentGoal(2)-robot.Posicion(2)-robot.InitPos(2),currentGoal(1)-robot.Posicion(1)-robot.InitPos(1));
+
+if abs(robot.Posicion(3)+robot.InitPos(3)-angleofattack)>0.1 
+   robot=moverRobot(robot,);
+else
+    
+end
+robot.TotalTime=robot.TotalTime+robot.TimeStep;
+end

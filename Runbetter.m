@@ -60,7 +60,7 @@ while abs(sum(Robot.PosReal(1:2)-[6,6]))>1
     error=[error; Robot.PosReal-Robot.Posicion-Robot.InitPos];
 end
 
-while abs(sum(Robot.PosReal(1:2)-[4,4]))>1
+while abs(sum(Robot.PosReal(1:2)-[4,4]))>0.1
     Robot=moverRobotA(Robot,[4,4]);
     [distancia, angulo] =  escanearAlrededores(Robot);
     checkCollided(Robot)
