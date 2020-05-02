@@ -12,8 +12,7 @@ for a = 0:SGoal-1
     DestinoY=Goal(1+a*2);
     DestinoX=Goal(2+a*2);
     GoalRegister(round(DestinoX*MAPB.Resolution)+1,round(DestinoY*MAPB.Resolution)+1)=1;
-     disp([round(DestinoX*MAPB.Resolution)+1,round(DestinoY*MAPB.Resolution)+1])
-     disp([StartX,StartY])
+
 end
 
 %nNeighboor=3;
@@ -56,8 +55,8 @@ N_Neighboors=size(col,1);
 RegisteredGoals=[row col];
 Nodesfound=size(RegisteredGoals,1);
 
-for k=1:size(GoalRegister,1)
-    for j=1:size(GoalRegister,2)
+for k=1:Height
+    for j=1:Width
         if MAP(k,j)==0
             Mat=RegisteredGoals-(repmat([j k],(Nodesfound),1));
             Distance=(min(sqrt(sum(abs(Mat).^2,2))));

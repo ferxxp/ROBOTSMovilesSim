@@ -1,33 +1,45 @@
 function [robot] = Explorer(robot)
-Sight=2;
+Sight=ceil(2*robot.Mapa.Resolution);
 [Height,Width]=size(getOccupancy(robot.Mapa));
 Visited=zeros(Height,Width);
-SightMatrix=ones((Sight*2+1));
 
-X=3;Y=3;
-Visited(X-Sight:X+Sight,Y-Sight:Y+Sight)=SightMatrix;
 
-Values=conv2(Visited+getOccupancy(robot.Mapa),ones(3),'same');
+while sum(sum(Visited))<Height*Width/2
+    Values=conv2(Visited+getOccupancy(robot.Mapa),ones(Sight),'same');
 
-[GX,GY]=find(Values==min(min(Values)));
-indices = randperm(length(GX));
+    [GX,GY]=find(Values==min(min(Values)));
+    indices = randperm(length(GX));
 
-indices = indices(1:10);
-
-while sum(sum(SightMatrix))<Height*Width/10
-    
-    path=Path(robot,[GX(indices)/robot.Mapa.Resolution,GY(indices)/robot.Mapa.Resolution],0.2,false)
-    
-    if path~=inf  
-        [robot,path]=moverRobotA2(robot,path);
-        [distancia, angulo] =  escanearAlrededores(robot);
-        if true
-            robot=mostrarScan(robot,distancia,angulo);
-        end
+    indices = indices(1:10);
+    GOALS=[GX(indices)/robot.Mapa.Resolution,GY(indices)/robot.Mapa.Resolution];
+   
+    path=Path(robot,GOALS,0.2,false);
+    [Psize,~]=size(path);
+    goal=path(Psize,:);
+     
+    while (abs(sum(robot.Posicion(1:2)+robot.InitPos(1:2)-goal,2)))>0.3
+        if path~=inf
+            [robot,path]=moverRobotA2(robot,path);
+            [distancia, angulo] =  escanearAlrededores(robot);
+            Visited=AddVisited(robot,Visited,Sight);
+            
+            if true
+                robot=mostrarScan(robot,distancia,angulo);
+            end
             unirEscaneo(robot,distancia,angulo);
-        if true
-            robot=updatePlotRobot(robot);
+            if true
+                robot=updatePlotRobot(robot);
+            end
+        else
+            disp('No more places to explore')
+            break
         end
     end
+    figure;
+    surf(Visited)
+    shading interp
+    colormap colorcube
+    daspect([1,1,1])
+    view(0,90)
 end
 disp ('done')
