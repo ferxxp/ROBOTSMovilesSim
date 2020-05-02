@@ -18,6 +18,7 @@ while sum(sum(Visited))<Height*Width/2
     goal=path(Psize,:);
      
     while (abs(sum(robot.Posicion(1:2)+robot.InitPos(1:2)-goal,2)))>0.3
+        
         if path~=inf
             [robot,path]=moverRobotA2(robot,path);
             [distancia, angulo] =  escanearAlrededores(robot);
@@ -30,9 +31,12 @@ while sum(sum(Visited))<Height*Width/2
             if true
                 robot=updatePlotRobot(robot);
             end
+            path=Path(robot,goal,0.2,false);
         else
+            robot=moverRobot(robot,2,0);
             disp('No more places to explore')
-            break
+            Visited=AddVisited(robot,Visited,Sight);
+            path=Path(robot,goal,0.2,false);
         end
     end
     figure;
