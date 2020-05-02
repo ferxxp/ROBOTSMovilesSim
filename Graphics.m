@@ -4,10 +4,18 @@
 %         disp(mod(angle,pi)*sign(angle)*(-1)^(floor(angle/pi)))
 %     end
 % end
+addpath('Robot','exploracion')  
 
 
+close all
+clear all
 
-
+str1='maps/map';
+str2='/map';
+str3='.csv';
+for a= 1:3
+load(sprintf('%s%d%s%d%s',str1,a,str2,a,str3))
+end
 %%
 Robot=RobotGen(map1,[2,2,0],[0,10],0.1,false,false,5,5);
 Robot=updatePlotRobot(Robot);

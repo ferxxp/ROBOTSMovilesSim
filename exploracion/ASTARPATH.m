@@ -113,7 +113,7 @@ while 1==1 %Code will break when path found or when no path exist
                     YPOS=round(K*i/JumpCells);
                     XPOS=round(K*j/JumpCells);
             
-                    if (MAPB(CurrentY+YPOS,CurrentX+XPOS)==1)
+                    if (MAP(CurrentY+YPOS,CurrentX+XPOS)==1)
                         Flag=0;
                     end
                 end

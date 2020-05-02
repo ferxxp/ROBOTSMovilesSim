@@ -15,7 +15,7 @@ end
 angleofattack=atan2(currentGoal(2)-Pose(2),currentGoal(1)-Pose(1));
 anglerob=Pose(3);
 if(abs(anglerob)>pi)
-        anglerob=(mod(angle,pi)*sign(angle)*(-1)^(floor(angle/pi)));
+        anglerob=(mod(anglerob,pi)*sign(anglerob)*(-1)^(floor(anglerob/pi)));
 end
 anglerror=angleofattack-anglerob;
 disp('_')

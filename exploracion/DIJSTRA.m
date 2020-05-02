@@ -8,9 +8,6 @@ for a = 1:SGoal
     DestinoY=Goal(a,1);
     DestinoX=Goal(a,2);
     MAP(round(DestinoX*MAPB.Resolution)+1,round(DestinoY*MAPB.Resolution)+1)=5;
-    max(max(MAP))
-     disp([round(DestinoX*MAPB.Resolution)+1,round(DestinoY*MAPB.Resolution)+1])
-     disp([Start(1),Start(2)])
 end
 figure;
     surf(MAP)
