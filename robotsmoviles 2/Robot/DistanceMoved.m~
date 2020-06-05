@@ -1,9 +1,0 @@
-function [total] = DistanceMoved(Robot)
-
-[]size(Robot.histPos)
-for
-    total=total+ norm(a)
-end
-
-end
-
