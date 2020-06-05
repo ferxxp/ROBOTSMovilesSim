@@ -52,3 +52,15 @@ robotsmoviles/Robot/RobotGen.m
 robotsmoviles/Robot/unirEscaneo.m
 robotsmoviles/Robot/updatePlotRobot.m
 robotsmoviles/trabajo.m
+navegacion/PathD.m
+navegacion/DIJKSTRA.m
+navegacion/Path.m
+navegacion/ASTARPATH.m
+exploracion/AddVisited.m
+exploracion/bug.m
+exploracion/bug_int.m
+exploracion/bug_semi.m
+exploracion/esquinas.m
+exploracion/ExploredData.m
+exploracion/Explorer.m
+exploracion/vista.m
