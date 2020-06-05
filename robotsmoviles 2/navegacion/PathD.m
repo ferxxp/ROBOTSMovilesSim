@@ -1,4 +1,4 @@
-function Ruta= Path(robot,Goal,Inflation,ideal)
+function Ruta= PathD(robot,Goal,Inflation,ideal)
 
 if nargin==4 && ideal
     Grid=binaryOccupancyMap(flip(getOccupancy(robot.MapaReal)),robot.MapaReal.Resolution);
@@ -25,36 +25,36 @@ MAP = getOccupancy(Grid);
 Connecting_Distance=8; %Avoid to high values Connecting_Distances for reasonable runtimes. 
 
 % Running PathFinder
-OptimalPath=ASTARPATH(Start,Grid,Goal,Connecting_Distance);
+OptimalPath=DIJKSTRA(Start,Grid,Goal,Connecting_Distance);
 % End. 
 
-if size(OptimalPath,2)>1
- figure
- hold on
-imagesc([0.5,ejex-0.5],[0.5,ejey-0.5],(MAP))
-%imagesc((MAP))
-set(gca,'Ydir','normal')
-    colormap(flipud(gray));
-
-hold on
-plot(OptimalPath(1,2),OptimalPath(1,1),'o','color','k')
-plot(OptimalPath(end,2),OptimalPath(end,1),'o','color','b')
-plot(OptimalPath(:,2),OptimalPath(:,1),'r')
-daspect([1,1,1])
-legend('Goal','Start','Path')
-
-else 
- figure
- hold on
- imagesc((MAP))
-    set(gca,'Ydir','normal')
-    colormap(flipud(gray));
-    plot(Goal(:,2).*Grid.Resolution+1,Goal(:,1).*Grid.Resolution+1,'o','color','b')
-    plot(Start(1),Start(2),'o','color','k')
-    daspect([1,1,1])
-    legend('Goal','Start')
-
-end
+% if size(OptimalPath,2)>1
+%  figure
+%  hold on
+% imagesc([0.5,ejex-0.5],[0.5,ejey-0.5],(MAP))
+% %imagesc((MAP))
+% set(gca,'Ydir','normal')
+%     colormap(flipud(gray));
+% 
+% hold on
+% plot(OptimalPath(1,2),OptimalPath(1,1),'o','color','k')
+% plot(OptimalPath(end,2),OptimalPath(end,1),'o','color','b')
+% plot(OptimalPath(:,2),OptimalPath(:,1),'r')
+% daspect([1,1,1])
+% legend('Goal','Start','Path')
+% 
+% else 
+%  figure
+%  hold on
+%  imagesc((MAP))
+%     set(gca,'Ydir','normal')
+%     colormap(flipud(gray));
+%     plot(Goal(:,2).*Grid.Resolution+1,Goal(:,1).*Grid.Resolution+1,'o','color','b')
+%     plot(Start(1),Start(2),'o','color','k')
+%     daspect([1,1,1])
+%     legend('Goal','Start')
+% 
+% end
 
 Ruta = flip(flip(OptimalPath./Grid.Resolution,2));
 end

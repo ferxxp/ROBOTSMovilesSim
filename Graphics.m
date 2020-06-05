@@ -6,13 +6,13 @@
 % end
 
 %%
-Robot=RobotGen(map1,[2,2,0],[0,10],0.1,false,false,5,5);
+Robot=RobotGen(map3,[2,2,0],[0,10],0.1,false,false,5,5);
 Robot=updatePlotRobot(Robot);
 while true
     figure(Robot.figMapa);
     p=drawpoint();
     p.Position;
-    path=Path(Robot,p.Position,0.2,false);
+    path=Path(Robot,p.Position,0.2,0,1);
     if path~=inf
         [Psize,~]=size(path);
         goal=path(Psize,:);
