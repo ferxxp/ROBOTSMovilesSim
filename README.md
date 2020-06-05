@@ -1,8 +1,5 @@
-<<<<<<< HEAD
-1.   Simulador del Robot
 
-![Captura de pantalla de un celular Descripción generada
-automáticamente](ReadMe.fld/image002.png)
+1.   Simulador del Robot
 
 El código que se presenta se basa en OOP (Object Oriented Programing).
 El objeto principal es Robot, que esta compuesto por:
